@@ -55,16 +55,21 @@
 <div id="map"></div>
 
 <script>
+/* =========================
+   地図初期化
+========================= */
 const map = L.map('map').setView([33.56, 133.52], 11);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap'
 }).addTo(map);
 
-/* 安全なCDN版ピン画像を使用 */
+/* =========================
+   アイコン定義（赤・青・緑）
+========================= */
 const icons = {
   monThu: L.icon({
-    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+    iconUrl: "https://rawcdn.githack.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
     shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
     iconSize: [25,41],
     iconAnchor: [12,41],
@@ -86,7 +91,9 @@ const icons = {
   })
 };
 
-/* ピンデータ（全色15本ずつ） */
+/* =========================
+   ピンデータ（各色15本）
+========================= */
 const points = [
   ["本町","monThu",33.5599,133.5317], ["帯屋町","monThu",33.5607,133.5329],
   ["北久保","monThu",33.5751,133.5376], ["南久保","monThu",33.5681,133.5421],
@@ -116,7 +123,9 @@ const points = [
   ["鏡北谷","mountain",33.6300,133.4720]
 ];
 
-/* マーカー生成 */
+/* =========================
+   マーカー生成
+========================= */
 const markers = [];
 points.forEach(p => {
   const marker = L.marker([p[2], p[3]], { icon: icons[p[1]] }).addTo(map);
@@ -129,7 +138,9 @@ points.forEach(p => {
   markers.push({ name: p[0], marker });
 });
 
-/* 町名検索 */
+/* =========================
+   町名検索
+========================= */
 function searchTown() {
   let keyword = document.getElementById("searchInput").value.trim();
   if (!keyword) return;
@@ -144,7 +155,6 @@ function searchTown() {
 }
 
 document.getElementById("searchBtn").addEventListener("click", searchTown);
-
 </script>
 
 </body>
